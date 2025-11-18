@@ -133,21 +133,24 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-[repeat(auto-fill,minmax(12px,12px))] gap-1 justify-center">
-            {Array.from({ length: totalWeeks }, (_, i) => (
-              <button
-                key={i}
-                onClick={() => handleWeekClick(i)}
-                className={`
-                  w-3 h-3 rounded-sm transition-all duration-200 
-                  hover:scale-125 hover:shadow-lg
-                  ${hasContent(i) 
-                    ? 'bg-accent hover:bg-accent/80' 
-                    : 'bg-secondary hover:bg-muted'
-                  }
-                `}
-                title={formatDateRange(i)}
-              />
-            ))}
+            {Array.from({ length: totalWeeks }, (_, i) => {
+              const reversedIndex = totalWeeks - 1 - i;
+              return (
+                <button
+                  key={reversedIndex}
+                  onClick={() => handleWeekClick(reversedIndex)}
+                  className={`
+                    w-3 h-3 rounded-sm transition-all duration-200 
+                    hover:scale-125 hover:shadow-lg
+                    ${hasContent(reversedIndex) 
+                      ? 'bg-accent hover:bg-accent/80' 
+                      : 'bg-secondary hover:bg-muted'
+                    }
+                  `}
+                  title={formatDateRange(reversedIndex)}
+                />
+              );
+            })}
           </div>
         </div>
       </main>
